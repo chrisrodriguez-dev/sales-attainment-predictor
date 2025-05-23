@@ -36,8 +36,13 @@ def main():
 
     if uploaded_file is not None:
         df = load_transactions(uploaded_file)
-    
-main()
+        return df
+    return None
+
+
+## Only run the code below if this file is being run directly    
+if __name__ == "__main__":
+    main()
 
 
 
