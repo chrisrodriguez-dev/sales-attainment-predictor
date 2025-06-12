@@ -1,6 +1,6 @@
 AT&T Retail Sales Attainment Predictor
 
-This project is a machine learning-powered dashboard built with Streamlit, designed to forecast next month's sales attainment for AT&T retail sales representatives. It leverages historical performance data to provide data-driven predictions and insights.
+This project is a machine learning-powered dashboard built with Streamlit, designed to forecast next month's sales attainment for AT&T retail sales representatives. It leverages historical performance data to provide data-driven predictions and insights. This is not for official use.
 
 Key Features
 
