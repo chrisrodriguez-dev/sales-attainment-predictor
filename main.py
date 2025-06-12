@@ -24,6 +24,9 @@ def main():
 
             # Run pipeline
             df_clean = clean_data(raw_df)
+            st.subheader("🧪 Cleaned Column Stats")
+            st.write(df_clean.describe())
+            st.write("Missing values:", df_clean.isna().sum())
             df_preprocessed = preprocess_data(df_clean)
             df_lagged = create_lag_features(df_preprocessed)
             model, X_test, y_test, y_pred = train_model(df_lagged)

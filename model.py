@@ -42,9 +42,8 @@ def clean_data(df):
     return df
 
 def preprocess_data(df):
-
-
-    selected_features = [
+    available_features = []
+    required_features = [
         'Trade-In Opp Att Rt',
         'HTP Tot Feat Att Rt',
         'NextUp AT Installment Plan Mix',
@@ -52,16 +51,19 @@ def preprocess_data(df):
         'Overall CSAT',
         'Sales Attain'
     ]
+    
+    for col in required_features:
+        if col in df.columns:
+            if not df[col].isna().all():
+                available_features.append(col)
 
-    df = df[selected_features]
-    df = df.dropna(axis=1, how='all')
+    df = df[available_features]
 
-    # Impute missing values
+    # Guard: Make sure we have enough features left
+    if 'Sales Attain' not in df.columns or len(df.columns) <= 1:
+        raise ValueError("Not enough valid features for modeling.")
+
     df = df.fillna(df.mean(numeric_only=True))
-
-    # Check if we still have data
-    if df.empty:
-        raise ValueError("No rows left after imputation.")
 
     X = df.drop(columns=['Sales Attain'])
     y = df['Sales Attain']
@@ -76,6 +78,8 @@ def preprocess_data(df):
     df_scaled['Sales Attain'] = y.values
 
     return df_scaled
+
+
 
 
 def create_lag_features(df, group_by_col=None):
